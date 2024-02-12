@@ -8,7 +8,11 @@ app.use(express.static('public'))
 
 const server = require("http").Server(app)
 app.get("/", (req, res) => {
-    res.redirect("/"+uuiv4())
+    res.redirect(`${uuiv4()}`)
+})
+
+app.get("/:home", (req, res) => {
+    res.render("room")
 })
 
 server.listen(process.env.PORT || 3000)
