@@ -13,7 +13,7 @@ ConnectHub is a Zoom-inspired project implemented with Vanilla JS, Pure CSS, EJS
 
 To run this project locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/yourusername/connecthub.git`
+1. Clone the repository: `git clone https://github.com/Tamiru-Alemnew/Connect-Hub.git`
 2. Navigate into the project directory: `cd connecthub`
 3. Install dependencies: `npm install`
 4. Start the server: `node server.js`
