@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub — Open Source Video Conferencing</title>
+  <meta name="description" content="Free, peer-to-peer video conferencing. No accounts, no downloads, no tracking. Create a room, share a link, start talking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body>
+
+  <!-- FIXED NAV (appears on scroll) -->
+  <nav class="landing-nav" id="landingNav">
+    <a href="/" class="landing-nav__logo">
+      <div class="landing-nav__logo-icon"><i class="fas fa-video"></i></div>
+      <span>ConnectHub</span>
+    </a>
+    <div class="landing-nav__right">
+      <a href="https://github.com/Tamiru-Alemnew/Connect-Hub" class="landing-nav__link" target="_blank" rel="noreferrer">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="/create" class="landing-nav__cta">Start Meeting <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge hero-animate">
+        <span class="hero-badge__dot"></span>
+        Open Source Video Conferencing
+      </div>
+
+      <h1 class="hero-title hero-animate">
+        Video calls that feel<br><span class="gradient-text">effortless.</span>
+      </h1>
+
+      <p class="hero-subtitle hero-animate">
+        Free, peer-to-peer video conferencing built with WebRTC.
+        No accounts, no downloads, no tracking. Just create a room and share the link.
+      </p>
+
+      <div class="hero-actions hero-animate">
+        <a href="/create" class="btn-primary">
+          Start a Meeting <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="https://github.com/Tamiru-Alemnew/Connect-Hub" class="btn-secondary" target="_blank" rel="noreferrer">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
+      </div>
+
+      <div class="hero-mockup hero-animate">
+        <div class="hero-mockup-inner">
+          <div class="mockup-browser-bar">
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+            <div class="mockup-bar-url">connecthub.app/room/abc123</div>
+          </div>
+          <div class="mockup-content">
+            <div class="mockup-tile mockup-tile--speaking">
+              <div class="mockup-avatar"></div>
+              <div class="mockup-name">You</div>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-avatar"></div>
+              <div class="mockup-name">Alex</div>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-avatar"></div>
+              <div class="mockup-name">Sarah</div>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-avatar"></div>
+              <div class="mockup-name">Mike</div>
+            </div>
+          </div>
+          <div class="mockup-controls">
+            <div class="mockup-ctrl mockup-ctrl--active"><i class="fas fa-microphone"></i></div>
+            <div class="mockup-ctrl mockup-ctrl--active"><i class="fas fa-video"></i></div>
+            <div class="mockup-ctrl"><i class="fas fa-desktop"></i></div>
+            <div class="mockup-ctrl"><i class="fas fa-comment-dots"></i></div>
+            <div class="mockup-ctrl mockup-ctrl--danger"><i class="fas fa-phone-slash"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll__mouse"><div class="hero-scroll__wheel"></div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Built for simplicity.</h2>
+        <p class="section-subtitle">Everything you need, nothing you don't.</p>
+      </div>
+
+      <div class="features-grid animate-on-scroll stagger">
+        <div class="feature-card" style="--card-accent: #6366f1;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8);">
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+          <h3>Peer-to-Peer</h3>
+          <p>Direct browser-to-browser connections via WebRTC. Your video and audio never touch our servers.</p>
+        </div>
+        <div class="feature-card" style="--card-accent: #8b5cf6;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">
+            <i class="fas fa-lock-open"></i>
+          </div>
+          <h3>No Sign Up Required</h3>
+          <p>Create a room instantly. Share the link. That's it. No accounts, no downloads, no app installs.</p>
+        </div>
+        <div class="feature-card" style="--card-accent: #ec4899;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">
+            <i class="fab fa-github"></i>
+          </div>
+          <h3>Fully Open Source</h3>
+          <p>Every line of code is open. Fork it, self-host it, contribute to it. MIT licensed. Built by the community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps-section">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Three steps. That's it.</h2>
+        <p class="section-subtitle">No setup wizards. No configuration. No nonsense.</p>
+      </div>
+
+      <div class="steps-container animate-on-scroll stagger">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-connector"></div>
+          <h4 class="step-title">Create a Room</h4>
+          <p class="step-desc">Click a button and get a unique room link instantly.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-connector"></div>
+          <h4 class="step-title">Share the Link</h4>
+          <p class="step-desc">Send it over any channel — chat, email, carrier pigeon.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4 class="step-title">Start Talking</h4>
+          <p class="step-desc">They open the link and you're connected. Peer-to-peer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN SOURCE CTA -->
+  <section class="oss-section">
+    <div class="oss-card animate-on-scroll">
+      <div class="oss-card__inner">
+        <i class="fab fa-github oss-icon"></i>
+        <h2 class="oss-title">Built in <span class="gradient-text">the open.</span></h2>
+        <p class="oss-desc">
+          We believe video conferencing should be transparent, privacy-respecting,
+          and community-driven. Every feature, every fix, every decision happens
+          in the open. Join us.
+        </p>
+        <div class="oss-stats">
+          <div class="oss-stat">
+            <i class="fas fa-scale-balanced"></i>
+            <span>MIT Licensed</span>
+          </div>
+          <div class="oss-stat">
+            <i class="fas fa-heart"></i>
+            <span>100% Free</span>
+          </div>
+          <div class="oss-stat">
+            <i class="fas fa-users"></i>
+            <span>Contributors Welcome</span>
+          </div>
+        </div>
+        <div class="oss-actions">
+          <a href="https://github.com/Tamiru-Alemnew/Connect-Hub" class="btn-primary" target="_blank" rel="noreferrer">
+            Contribute on GitHub <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="https://github.com/Tamiru-Alemnew/Connect-Hub/issues" class="btn-secondary" target="_blank" rel="noreferrer">
+            View Open Issues
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK START -->
+  <section class="quickstart-section">
+    <div class="section-inner">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Try it now.</h2>
+        <p class="section-subtitle">Enter a room name or paste a link to join instantly.</p>
+      </div>
+      <div class="quickstart-group animate-on-scroll">
+        <div class="quickstart-input-group">
+          <i class="fas fa-link quickstart-icon"></i>
+          <input type="text" id="quickstartInput" class="quickstart-input" placeholder="my-meeting-room" autocomplete="off" spellcheck="false">
+          <button class="quickstart-btn" id="quickstartBtn">Create Room <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="landing-footer">
+    <div class="footer-links">
+      <a href="https://github.com/Tamiru-Alemnew/Connect-Hub" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/Tamiru-Alemnew/Connect-Hub#readme" target="_blank" rel="noreferrer">Documentation</a>
+      <a href="https://github.com/Tamiru-Alemnew/Connect-Hub/issues" target="_blank" rel="noreferrer">Report Issue</a>
+      <a href="https://github.com/Tamiru-Alemnew/Connect-Hub/blob/main/LICENSE" target="_blank" rel="noreferrer">License</a>
+    </div>
+    <p class="footer-copy">ConnectHub — open source, always.</p>
+  </footer>
+
+  <script>
+    // Fixed nav on scroll
+    const hero = document.getElementById('hero');
+    const nav = document.getElementById('landingNav');
+    if (hero && nav) {
+      const navObs = new IntersectionObserver(([e]) => {
+        nav.classList.toggle('visible', !e.isIntersecting);
+      }, { threshold: 0.1 });
+      navObs.observe(hero);
+    }
+
+    // Scroll animations
+    const scrollObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObs.observe(el));
+
+    // Quick start / join room
+    const qsBtn = document.getElementById('quickstartBtn');
+    const qsInput = document.getElementById('quickstartInput');
+    if (qsBtn && qsInput) {
+      function goToRoom() {
+        const val = qsInput.value.trim();
+        if (!val) { window.location.href = '/create'; return; }
+        let roomId = val;
+        if (val.includes('/')) roomId = val.split('/').filter(Boolean).pop();
+        window.location.href = '/' + roomId;
+      }
+      qsBtn.addEventListener('click', goToRoom);
+      qsInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); goToRoom(); } });
+    }
+
+    // Hero join (reuse from nav CTA)
+    // Mobile nav toggle (not needed — nav is minimal)
+  </script>
+</body>
+</html>

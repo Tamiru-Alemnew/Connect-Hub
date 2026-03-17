@@ -1,92 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zoom Clone</title>
-    <script>
-      const ROOM_ID = "<%= roomId %>";
-    </script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
-    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="main">
-      <div class="main__left">
-        <div class="main__videos">
-          <div id="video-grid"></div>
-        </div>
-        <div class="main__controls">
-          <div class="main__controls__block">
-            <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
-              <i class="fas fa-microphone"></i>
-              <span>Mute</span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub — Meeting Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- AMBIENT BACKGROUND -->
+  <div class="ambient-bg" id="ambientBg">
+    <div class="ambient-blob"></div>
+    <div class="ambient-blob"></div>
+    <div class="ambient-blob"></div>
+  </div>
+
+  <!-- PRE-JOIN SCREEN -->
+  <div class="prejoin" id="prejoinScreen">
+    <div class="prejoin__mesh-bg">
+      <div class="prejoin__mesh-blob"></div>
+      <div class="prejoin__mesh-blob"></div>
+      <div class="prejoin__mesh-blob"></div>
+    </div>
+
+    <div class="prejoin__container">
+      <div class="prejoin__header">
+        <a href="/" class="prejoin__logo">
+          <div class="nav__logo-icon"><i class="fas fa-video"></i></div>
+          <span class="nav__logo-text">ConnectHub</span>
+        </a>
+      </div>
+
+      <div class="prejoin__card">
+        <div class="prejoin__content">
+          <!-- Video Preview -->
+          <div class="prejoin__preview">
+            <div class="prejoin__video-container">
+              <video id="prejoinVideo" autoplay playsinline muted></video>
+              <div class="prejoin__no-video" id="prejoinNoVideo" style="display:none">
+                <div class="prejoin__avatar" id="prejoinAvatar">
+                  <span>?</span>
+                </div>
+              </div>
+              <div class="prejoin__preview-controls">
+                <button class="prejoin__toggle prejoin__toggle--active"
+                        id="prejoinMicToggle" title="Toggle microphone">
+                  <i class="fas fa-microphone"></i>
+                </button>
+                <button class="prejoin__toggle prejoin__toggle--active"
+                        id="prejoinVideoToggle" title="Toggle camera">
+                  <i class="fas fa-video"></i>
+                </button>
+              </div>
             </div>
-            <div onclick="playStop()" class="main__controls__button main__video_button">
+          </div>
+
+          <!-- Join Form -->
+          <div class="prejoin__form">
+            <h2 class="prejoin__title">Ready to join?</h2>
+            <p class="prejoin__room-info">
+              Room: <span id="prejoinRoomId"></span>
+            </p>
+
+            <div class="prejoin__input-group">
+              <label class="prejoin__label" for="displayName">Your name</label>
+              <input type="text"
+                     id="displayName"
+                     class="prejoin__input"
+                     placeholder="Enter your display name"
+                     maxlength="30"
+                     autocomplete="off"
+                     autofocus>
+            </div>
+
+            <button class="prejoin__join-btn" id="btnJoinRoom">
               <i class="fas fa-video"></i>
-              <span>Stop Video</span>
-            </div>
-          </div>
-          <div class="main__controls__block">
-            <div class="main__controls__button">
-              <i class="fas fa-shield-alt"></i>
-              <span>Security</span>
-            </div>
-            <div class="main__controls__button">
-              <i class="fas fa-user-friends"></i>
-              <span>Participants</span>
-            </div>
-            <div class="main__controls__button">
-              <i class="fas fa-comment-alt"></i>
-              <span>Chat</span>
-            </div>
-          </div>
-          <div class="main__controls__block">
-            <div class="main__controls__button">
-              <span class="leave_meeting">Leave Meeting</span>
-            </div>
+              Join Meeting
+            </button>
+
+            <p class="prejoin__hint">
+              <i class="fas fa-info-circle"></i>
+              Your video and audio can be changed during the meeting
+            </p>
           </div>
         </div>
       </div>
-      <div class="main__right">
-        <div class="main__header">
-          <h6>Chat</h6>
-        </div>
-        <div class="main__chat_window">
-            <ul class="messages">
-               
-            </ul>
+    </div>
+  </div>
 
-         </div>
-         <div class="main__message_container">
-            <input id="chat_message" type="text" placeholder="Type message here...">
-         </div>
+  <!-- Hidden data -->
+  <script>
+    window.ROOM_ID = '<%= roomId %>';
+  </script>
+
+  <div id="app" class="app">
+
+    <!-- TOP BAR -->
+    <header class="topbar" id="topbar">
+      <div class="topbar__left">
+        <div class="topbar__logo">
+          <i class="fas fa-video"></i>
+          <span>ConnectHub</span>
+        </div>
+      </div>
+      <div class="topbar__center">
+        <div class="topbar__meeting-info">
+          <span class="topbar__meeting-id" id="meetingId" title="Click to copy room ID">
+            <i class="fas fa-lock"></i>
+            <span id="roomIdDisplay"></span>
+            <i class="fas fa-copy copy-icon"></i>
+          </span>
+          <span class="topbar__separator">·</span>
+          <span class="topbar__timer" id="meetingTimer">00:00:00</span>
+        </div>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__connection-status" id="connectionStatus">
+          <span class="status-dot status-dot--connected"></span>
+          <span class="status-text">Connected</span>
+        </div>
+        <div class="topbar__participants">
+          <i class="fas fa-user"></i>
+          <span id="topbarParticipantCount">1</span>
+        </div>
+        <button class="topbar__btn" id="btnDebugPanel" title="Network Stats">
+          <i class="fas fa-chart-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+      <!-- VIDEO AREA -->
+      <section class="video-area" id="videoArea">
+
+        <!-- Video Grid Container -->
+        <div class="video-grid" id="videoGrid"></div>
+
+        <!-- Screen share view (hidden by default) -->
+        <div class="screen-share-view" id="screenShareView" style="display:none">
+          <video id="screenShareVideo" autoplay playsinline></video>
+          <div class="screen-share-label">
+            <i class="fas fa-desktop"></i>
+            <span id="screenShareLabel">Screen Share</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SIDE PANEL (Chat / Participants / Debug) -->
+      <aside class="side-panel" id="sidePanel">
+
+        <!-- Panel Header with Tabs -->
+        <div class="side-panel__tabs">
+          <button class="tab-btn tab-btn--active" data-tab="chat">
+            <i class="fas fa-comment-dots"></i>
+            <span>Chat</span>
+            <span class="tab-badge" id="chatBadge" style="display:none">0</span>
+          </button>
+          <button class="tab-btn" data-tab="participants">
+            <i class="fas fa-users"></i>
+            <span>People</span>
+            <span class="tab-badge" id="participantCount">1</span>
+          </button>
+          <button class="tab-btn" data-tab="debug">
+            <i class="fas fa-bug"></i>
+            <span>Debug</span>
+          </button>
+          <button class="side-panel__close" id="closeSidePanel">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <!-- Chat Tab Content -->
+        <div class="tab-content tab-content--active" data-tab-content="chat">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-area">
+            <div class="chat-input-wrapper">
+              <input type="text"
+                     id="chatInput"
+                     class="chat-input"
+                     placeholder="Type a message..."
+                     autocomplete="off">
+              <button class="chat-send-btn" id="chatSendBtn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participants Tab Content -->
+        <div class="tab-content" data-tab-content="participants">
+          <div class="participants-list" id="participantsList"></div>
+        </div>
+
+        <!-- Debug Tab Content -->
+        <div class="tab-content" data-tab-content="debug">
+          <div class="debug-panel" id="debugPanel">
+            <div class="debug-section">
+              <h4>Local Info</h4>
+              <div class="debug-item">
+                <span class="debug-label">Peer ID</span>
+                <span class="debug-value" id="debugLocalPeerId">—</span>
+              </div>
+              <div class="debug-item">
+                <span class="debug-label">Room ID</span>
+                <span class="debug-value" id="debugRoomId">—</span>
+              </div>
+            </div>
+            <div class="debug-section" id="debugPeerStats"></div>
+          </div>
+        </div>
+
+      </aside>
+
+    </main>
+
+    <!-- FLOATING CONTROL BAR -->
+    <footer class="control-bar" id="controlBar">
+      <div class="control-bar__center">
+        <button class="control-btn control-btn--active" id="btnMic" data-tooltip="Mic (M)">
+          <div class="control-btn__icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+        </button>
+
+        <button class="control-btn control-btn--active" id="btnVideo" data-tooltip="Camera (V)">
+          <div class="control-btn__icon">
+            <i class="fas fa-video"></i>
+          </div>
+        </button>
+
+        <div class="control-divider"></div>
+
+        <button class="control-btn" id="btnScreenShare" data-tooltip="Share Screen">
+          <div class="control-btn__icon">
+            <i class="fas fa-desktop"></i>
+          </div>
+        </button>
+
+        <button class="control-btn" id="btnChat" data-tooltip="Chat (C)">
+          <div class="control-btn__icon">
+            <i class="fas fa-comment-dots"></i>
+            <span class="control-btn__notification" id="chatNotification" style="display:none"></span>
+          </div>
+        </button>
+
+        <button class="control-btn" id="btnParticipants" data-tooltip="People (P)">
+          <div class="control-btn__icon">
+            <i class="fas fa-users"></i>
+          </div>
+        </button>
+
+        <div class="control-divider"></div>
+
+        <button class="control-btn control-btn--danger" id="btnLeave" data-tooltip="Leave">
+          <div class="control-btn__icon">
+            <i class="fas fa-phone-slash"></i>
+          </div>
+          <span>Leave</span>
+        </button>
+
+        <button class="control-btn control-btn--small" id="btnFullscreen" data-tooltip="Fullscreen (F)">
+          <div class="control-btn__icon">
+            <i class="fas fa-expand"></i>
+          </div>
+        </button>
+      </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- LEAVE CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="leaveModal" style="display:none">
+      <div class="modal">
+        <div class="modal__header">
+          <h3>Leave Meeting?</h3>
+        </div>
+        <div class="modal__body">
+          <p>Are you sure you want to leave this meeting?</p>
+        </div>
+        <div class="modal__footer">
+          <button class="btn--modal-secondary" id="btnCancelLeave">Cancel</button>
+          <button class="btn--modal-danger" id="btnConfirmLeave">Leave Meeting</button>
+        </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
-  </body>
+  </div>
+
+  <!-- Socket.IO client (auto-served) -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Main application (ES modules import the rest) -->
+  <script type="module" src="/js/main.js"></script>
+</body>
 </html>

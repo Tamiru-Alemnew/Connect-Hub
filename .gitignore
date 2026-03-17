@@ -21,6 +21,8 @@ dist/
 
 # Ignore dependency directories
 node_modules/
+.env
+*.log
 vendor/
 
 # Ignore log files
